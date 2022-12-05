@@ -1060,4 +1060,8 @@ guillaume@ubuntu:~/0x0F$
 
 -   GitHub repository: `alx-higher_level_programming`
 -   Directory: `0x0F-python-object_relational_mapping`
--   File: `102-relationship_cities_states_list.py`
+-   File: `102-relationship_cities_states_list.py` 
+
+## Author
+
+Elijah Lawal Ismaila
