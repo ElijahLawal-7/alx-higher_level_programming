@@ -1,27 +1,20 @@
 #!/usr/bin/python3
-'''
-script that takes in an argument and displays all values in the states
-'''
-
-import MySQLdb
+""" takes in an argument
+    and displays all values
+    in the states table of
+    hbtn_0e_0_usa where name matches the argument
+     Usage: ./2-my_filter_states.py <mysql username>
+                                    <mysql password>
+                                    <database name>
+                                    <state name searched>
+"""
 import sys
+import MySQLdb
 
-if __name__ == '__main__':
-    db = MySQLdb.connect(
-        user=sys.argv[1],
-        passwd=sys.argv[2],
-        db=sys.argv[3],
-        port=3306,
-        host='localhost')
-
-    cursor = db.cursor()
-    cursor.execute('SELECT * from states\
-                WHERE name LIKE "{}" COLLATE latin1_general_cs\
-                ORDER BY states.id'.format(sys.argv[4]))
-
-    states = cursor.fetchall()
-    for state in states:
-        print(state)
-
-    cursor.close()
-    db.close()
+if __name__ == "__main__":
+    db = MySQLdb.connect(user=sys.argv[1], passwd=sys.argv[2], db=sys.argv[3])
+    c = db.cursor()
+    c.execute("""SELECT * FROM states
+                WHERE name LIKE BINARY '{}'
+                ORDER BY states.id ASC""".format(sys.argv[4]).strip("'"))
+    [print(state) for state in c.fetchall()]
